@@ -1,0 +1,83 @@
+ul {
+  list-style-type: none;
+}
+
+.raceinfo {
+  height: auto;
+  width: 100%;
+  position: relative;
+  background-color: #eee;
+  margin: 0.5em;
+  padding: 0 0;
+  border-radius: 4px;
+  bottom: 10px;
+  text-align: center;
+}
+
+.first {
+  background-color: gold;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  display: inline-block;
+  font-size: small;
+  padding: 0.8em 0.7em 0 0.7em;
+  line-height: 0.9em;
+  position: relative;
+  height: 1.5em;
+  width: 1.5em;
+  margin-right: 0.8em;
+  border-radius: 100% 100% 100% 100%;
+}
+
+.second {
+  background-color: silver;
+  color: rgb(46, 46, 46);
+  text-align: center;
+  display: inline-block;
+  font-size: small;
+  padding: 0.8em 0.7em 0 0.7em;
+  line-height: 0.9em;
+  position: relative;
+  height: 1.5em;
+  width: 1.5em;
+  margin-right: 0.8em;
+  border-radius: 100% 100% 100% 100%;
+}
+
+.third {
+  background-color: #614e1a;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  display: inline-block;
+  font-size: small;
+  padding: 0.8em 0.7em 0 0.7em;
+  line-height: 0.9em;
+  position: relative;
+  height: 1.5em;
+  width: 1.5em;
+  margin-right: 0.8em;
+  border-radius: 100% 100% 100% 100%;
+}
+
+.other {
+  background-color: #59697a;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  display: inline-block;
+  font-size: small;
+  padding: 0.8em 0.7em 0 0.7em;
+  line-height: 0.9em;
+  position: relative;
+  height: 1.5em;
+  width: 1.5em;
+  margin-right: 0.8em;
+  border-radius: 100% 100% 100% 100%;
+}
+
+.players {
+  text-align: left;
+  position: relative;
+  height: 10px;
+  width: auto;
+  padding: 100% 100% 100% 100%;
+}

@@ -1,0 +1,11 @@
+<div class="track">
+<h4>Select Track</h4>
+<mat-form-field appearance="fill">
+  <mat-label>Track</mat-label>
+  <mat-select (selectionChange)="selectTrack(selectedTrack)" [(value)]="selectedTrack" required>
+    <mat-option *ngFor="let track of tracks" [value]="track.id">
+      {{track.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+</div>

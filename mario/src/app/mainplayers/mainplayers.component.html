@@ -1,0 +1,337 @@
+<h4 style="text-align: center">Select Racers</h4>
+<div>
+  <mat-form-field appearance="fill" class="player">
+    <mat-label>Player 1</mat-label>
+    <mat-select [(value)]="racers[0].playerId" (selectionChange)="update()">
+      <mat-option [value]="-1">None</mat-option>
+      <mat-option *ngFor="let player of players" [value]="player.id">
+        {{ player.firstname }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="player">
+    <mat-label>Player 2</mat-label>
+    <mat-select [(value)]="racers[1].playerId" (selectionChange)="update()">
+      <mat-option [value]="-1">None</mat-option>
+      <mat-option *ngFor="let player of players" [value]="player.id">
+        {{ player.firstname }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="player">
+    <mat-label>Player 3</mat-label>
+    <mat-select [(value)]="racers[2].playerId" (selectionChange)="update()">
+      <mat-option [value]="-1">None</mat-option>
+      <mat-option *ngFor="let player of players" [value]="player.id">
+        {{ player.firstname }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="player">
+    <mat-label>Player 4</mat-label>
+    <mat-select [(value)]="racers[3].playerId" (selectionChange)="update()">
+      <mat-option [value]="-1">None</mat-option>
+      <mat-option *ngFor="let player of players" [value]="player.id">
+        {{ player.firstname }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<form>
+  <mat-form-field appearance="fill" class="player">
+    <mat-label>P1 Position</mat-label>
+    <input
+      [(ngModel)]="racers[0].position"
+      matInput
+      type="number"
+      placeholder="Ex. 1"
+      [formControl]="positionControl1"
+      min="1"
+      max="12"
+      (click)="update()"
+    />
+    <mat-error *ngIf="positionControl1.invalid"
+      >Min place: 1 | Max place: 12</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="player">
+    <mat-label>P2 Position</mat-label>
+    <input
+      [(ngModel)]="racers[1].position"
+      matInput
+      type="number"
+      placeholder="Ex. 1"
+      [formControl]="positionControl2"
+      min="1"
+      max="12"
+      (click)="update()"
+    />
+    <mat-error *ngIf="positionControl2.invalid"
+      >Min place: 1 | Max place: 12</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="player">
+    <mat-label>P3 Position</mat-label>
+    <input
+      [(ngModel)]="racers[2].position"
+      matInput
+      type="number"
+      placeholder="Ex. 1"
+      [formControl]="positionControl3"
+      min="1"
+      max="12"
+      (click)="update()"
+    />
+    <mat-error *ngIf="positionControl3.invalid"
+      >Min place: 1 | Max place: 12</mat-error
+    >
+  </mat-form-field>
+  <mat-form-field appearance="fill" class="player">
+    <mat-label>P4 Position</mat-label>
+    <input
+      [(ngModel)]="racers[3].position"
+      matInput
+      type="number"
+      placeholder="Ex. 1"
+      [formControl]="positionControl4"
+      min="1"
+      max="12"
+      (click)="update()"
+    />
+    <mat-error *ngIf="positionControl4.invalid"
+      >Min place: 1 | Max place: 12</mat-error
+    >
+  </mat-form-field>
+</form>
+
+<mat-expansion-panel style="background-color: rgba(211, 211, 211, 0.25)">
+  <mat-expansion-panel-header>
+    <mat-panel-title> More Players </mat-panel-title>
+    <mat-panel-description>
+      For races with more than 4 racers
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+  <div>
+    <mat-form-field appearance="fill" class="player">
+      <mat-label>Player 5</mat-label>
+      <mat-select [(value)]="racers[4].playerId" (selectionChange)="update()">
+        <mat-option [value]="-1">None</mat-option>
+        <mat-option *ngFor="let player of players" [value]="player.id">
+          {{ player.firstname }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="player">
+      <mat-label>Player 6</mat-label>
+      <mat-select [(value)]="racers[5].playerId" (selectionChange)="update()">
+        <mat-option [value]="-1">None</mat-option>
+        <mat-option *ngFor="let player of players" [value]="player.id">
+          {{ player.firstname }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="player">
+      <mat-label>Player 7</mat-label>
+      <mat-select [(value)]="racers[6].playerId" (selectionChange)="update()">
+        <mat-option [value]="-1">None</mat-option>
+        <mat-option *ngFor="let player of players" [value]="player.id">
+          {{ player.firstname }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="player">
+      <mat-label>Player 8</mat-label>
+      <mat-select [(value)]="racers[7].playerId" (selectionChange)="update()">
+        <mat-option [value]="-1">None</mat-option>
+        <mat-option *ngFor="let player of players" [value]="player.id">
+          {{ player.firstname }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <form>
+    <mat-form-field appearance="fill" class="player">
+      <mat-label>P5 Position</mat-label>
+      <input
+        [(ngModel)]="racers[4].position"
+        matInput
+        type="number"
+        placeholder="Ex. 1"
+        [formControl]="positionControl5"
+        min="1"
+        max="12"
+        (click)="update()"
+      />
+      <mat-error *ngIf="positionControl5.invalid"
+        >Min place: 1 | Max place: 12</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="player">
+      <mat-label>P6 Position</mat-label>
+      <input
+        [(ngModel)]="racers[5].position"
+        matInput
+        type="number"
+        placeholder="Ex. 1"
+        [formControl]="positionControl6"
+        min="1"
+        max="12"
+        (click)="update()"
+      />
+      <mat-error *ngIf="positionControl6.invalid"
+        >Min place: 1 | Max place: 12</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="player">
+      <mat-label>P7 Position</mat-label>
+      <input
+        [(ngModel)]="racers[6].position"
+        matInput
+        type="number"
+        placeholder="Ex. 1"
+        [formControl]="positionControl7"
+        min="1"
+        max="12"
+        (click)="update()"
+      />
+      <mat-error *ngIf="positionControl7.invalid"
+        >Min place: 1 | Max place: 12</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="player">
+      <mat-label>P8 Position</mat-label>
+      <input
+        [(ngModel)]="racers[7].position"
+        matInput
+        type="number"
+        placeholder="Ex. 1"
+        [formControl]="positionControl8"
+        min="1"
+        max="12"
+        (click)="update()"
+      />
+      <mat-error *ngIf="positionControl8.invalid"
+        >Min place: 1 | Max place: 12</mat-error
+      >
+    </mat-form-field>
+  </form>
+
+  <mat-divider></mat-divider>
+
+  <div>
+    <mat-form-field appearance="fill" class="player">
+      <mat-label>Player 9</mat-label>
+      <mat-select [(value)]="racers[8].playerId" (selectionChange)="update()">
+        <mat-option [value]="-1">None</mat-option>
+        <mat-option *ngFor="let player of players" [value]="player.id">
+          {{ player.firstname }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="player">
+      <mat-label>Player 10</mat-label>
+      <mat-select [(value)]="racers[9].playerId" (selectionChange)="update()">
+        <mat-option [value]="-1">None</mat-option>
+        <mat-option *ngFor="let player of players" [value]="player.id">
+          {{ player.firstname }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="player">
+      <mat-label>Player 11</mat-label>
+      <mat-select [(value)]="racers[10].playerId" (selectionChange)="update()">
+        <mat-option [value]="-1">None</mat-option>
+        <mat-option *ngFor="let player of players" [value]="player.id">
+          {{ player.firstname }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="player">
+      <mat-label>Player 12</mat-label>
+      <mat-select [(value)]="racers[11].playerId" (selectionChange)="update()">
+        <mat-option [value]="-1">None</mat-option>
+        <mat-option *ngFor="let player of players" [value]="player.id">
+          {{ player.firstname }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <form>
+    <mat-form-field appearance="fill" class="player">
+      <mat-label>P9 Position</mat-label>
+      <input
+        [(ngModel)]="racers[8].position"
+        matInput
+        type="number"
+        placeholder="Ex. 1"
+        [formControl]="positionControl9"
+        min="1"
+        max="12"
+        (click)="update()"
+      />
+      <mat-error *ngIf="positionControl9.invalid"
+        >Min place: 1 | Max place: 12</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="player">
+      <mat-label>P10 Position</mat-label>
+      <input
+        [(ngModel)]="racers[9].position"
+        matInput
+        type="number"
+        placeholder="Ex. 1"
+        [formControl]="positionControl10"
+        min="1"
+        max="12"
+        (click)="update()"
+      />
+      <mat-error *ngIf="positionControl10.invalid"
+        >Min place: 1 | Max place: 12</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="player">
+      <mat-label>P11 Position</mat-label>
+      <input
+        [(ngModel)]="racers[10].position"
+        matInput
+        type="number"
+        placeholder="Ex. 1"
+        [formControl]="positionControl11"
+        min="1"
+        max="12"
+        (click)="update()"
+      />
+      <mat-error *ngIf="positionControl11.invalid"
+        >Min place: 1 | Max place: 12</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="player">
+      <mat-label>P12 Position</mat-label>
+      <input
+        [(ngModel)]="racers[11].position"
+        matInput
+        type="number"
+        placeholder="Ex. 1"
+        [formControl]="positionControl12"
+        min="1"
+        max="12"
+        (click)="update()"
+      />
+      <mat-error *ngIf="positionControl12.invalid"
+        >Min place: 1 | Max place: 12</mat-error
+      >
+    </mat-form-field>
+  </form>
+</mat-expansion-panel>

@@ -1,0 +1,27 @@
+<h4 style="text-align: center">Select two players</h4>
+<div style="width: 100%">
+  <mat-form-field appearance="fill" class="player">
+    <mat-label>Player 1</mat-label>
+    <mat-select [(value)]="selectedPlayer1">
+      <mat-option [value]="-1">None</mat-option>
+      <mat-option *ngFor="let player of players" [value]="player.id">
+        {{ player.firstname }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="player">
+    <mat-label>Player 2</mat-label>
+    <mat-select [(value)]="selectedPlayer2">
+      <mat-option [value]="-1">None</mat-option>
+      <mat-option *ngFor="let player of players" [value]="player.id">
+        {{ player.firstname }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<app-compareresult
+  [playersId1]="selectedPlayer1"
+  [playersId2]="selectedPlayer2"
+></app-compareresult>

@@ -1,0 +1,22 @@
+<app-mainplayers (eventPlayers)="setPlayers($event)"></app-mainplayers>
+<div style="display: flex; flex-grow: grow" class="info">
+  <app-maintrack (eventTrack)="setTrack($event)"></app-maintrack>
+  <app-mainengine (eventEngine)="setEngine($event)"></app-mainengine>
+</div>
+
+<section>
+  <div class="submitContainer">
+    <button
+      mat-raised-button
+      [disabled]="disablePost()"
+      class="submit"
+      (click)="submitRace()"
+    >
+      Submit
+    </button>
+  </div>
+  <br />
+  <div class="submitContainer">
+    <button mat-raised-button class="reset" (click)="reset()">Reset</button>
+  </div>
+</section>

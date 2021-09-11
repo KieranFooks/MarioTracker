@@ -1,0 +1,31 @@
+<div class="raceinfo" *ngIf="selectedRace as value">
+  <!--Track image-->
+  <img src="{{ vignette }}" width="100%" /><br />
+  <span
+    ><h3>
+      {{ selectedRace.track.name }} ({{ selectedRace.engineClass.name }})
+    </h3></span
+  >
+  <mat-list>
+    <mat-divider></mat-divider>
+    <mat-list-item *ngFor="let player of selectedRace.players" class="players">
+      <div mat-line>
+        <span *ngIf="player.position == 1" class="first">{{
+          player.position
+        }}</span>
+        <span *ngIf="player.position == 2" class="second">{{
+          player.position
+        }}</span>
+        <span *ngIf="player.position == 3" class="third">{{
+          player.position
+        }}</span>
+        <span *ngIf="player.position > 3" class="other">{{
+          player.position
+        }}</span>
+        {{ player.firstname }}
+      </div>
+      <img matListAvatar src="{{ url + player.avatar }}" height="40" />
+      <mat-divider></mat-divider>
+    </mat-list-item>
+  </mat-list>
+</div>

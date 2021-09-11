@@ -1,0 +1,266 @@
+<!-- Player card -->
+<div *ngIf="selectedPlayerInfo != null" style="display: flex; flex-grow: grow">
+  <!-- Main card -->
+  <mat-card style="width: 33.3%; height: fit-content">
+    <mat-card-header style="height: 100%">
+      <div
+        mat-card-avatar
+        style="background-image: url('{{
+          www + selectedPlayerInfo.avatar
+        }}'); background-size: cover; background-position: center; width: 5em; height: 5em;"
+      ></div>
+      <mat-card-title>
+        {{ selectedPlayerInfo.firstname }}
+      </mat-card-title>
+      <mat-card-subtitle>#{{ selectedPlayerInfo.id }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content style="position: relative; top: -50%;">
+      <br />
+      <p>Score : {{ selectedPlayerInfo.score }}</p>
+      <p>Ratio : {{ selectedPlayerInfo.ratio.toFixed(2) }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Favorite Cup card -->
+  <mat-card style="width: 33.3%; height: fit-content">
+    <mat-card-header style="height: 100%">
+      <div
+        mat-card-avatar
+        style="background-image: url('{{
+          www + selectedPlayerInfo.favoriteCup.picture
+        }}'); background-size: cover; background-position: center; width: 5em; height: 5em;"
+      ></div>
+      <mat-card-title>
+        Favorite Cup
+      </mat-card-title>
+      <mat-card-subtitle>{{ selectedPlayerInfo.favoriteCup.name }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content style="position: relative; top: -50%;">
+      <br />
+      <p>Number of Races : {{ getCupNbRaces() }}</p>
+      <p>Number of Wins : {{ getCupNbWins() }}</p>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Favorite Track Card -->
+  <mat-card style="width: 33.3%; height: fit-content">
+    <mat-card-header style="height: 100%">
+      <div
+        mat-card-avatar
+        style="background-image: url('{{
+          www + selectedPlayerInfo.favoriteTrack.vignette
+        }}'); background-size: cover; background-position: center; width: 5em; height: 5em;"
+      ></div>
+      <mat-card-title>
+        Favorite Track
+      </mat-card-title>
+      <mat-card-subtitle>{{ selectedPlayerInfo.favoriteTrack.name }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content style="position: relative; top: -50%;">
+      <br />
+      <p>Number of Races : {{ getTrackStats(selectedPlayerInfo.favoriteTrack.id).nbRaces }}</p>
+      <p>Number of Wins : {{ getTrackStats(selectedPlayerInfo.favoriteTrack.id).nbWins }}</p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<!-- Table title -->
+<div style="display: flex; flex-grow: grow">
+  <h3 style="width: 33%; text-align: center">Races History</h3>
+  <h3 style="width: 33%; text-align: center">Rivals Stats</h3>
+  <h3 style="width: 33%; text-align: center">Tracks Stats</h3>
+</div>
+
+<!-- Race History -->
+
+<div style="display:flex; flex-grow: grow">
+  <nav style="width: 100%">
+    <ul style="position: relative; left: -6%;">
+  <table mat-table style="width: 100%;"[dataSource]="selectedPlayerRaces">
+    <ng-container matColumnDef="No.">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let race">
+        {{ selectedPlayerRaces.indexOf(race) + 1 }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="vignette">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let race">
+        <div
+          mat-card-avatar
+          style="background-image: url( '{{
+            www + race.track.vignette
+          }}' ); background-size: cover; background-position: center;"
+        ></div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Track</th>
+      <td mat-cell *matCellDef="let race">{{ race.track.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="engine">
+      <th mat-header-cell *matHeaderCellDef>Engine Class</th>
+      <td mat-cell *matCellDef="let race">{{ race.engineClass.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let race">{{ race.date | date }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef>Position</th>
+      <td mat-cell *matCellDef="let race">
+        <span
+          *ngIf="race.position == 1"
+          style="color: rgb(173, 147, 0); font-weight: bold"
+          >{{ race.position }}</span
+        >
+        <span
+          *ngIf="race.position == 2"
+          style="color: silver; font-weight: bold"
+          >{{ race.position }}</span
+        >
+        <span
+          *ngIf="race.position == 3"
+          style="color: #cd7f32; font-weight: bold"
+          >{{ race.position }}</span
+        >
+        <span
+          *ngIf="race.position > 3 && race.position <= 5"
+          style="color: green"
+          >{{ race.position }}</span
+        >
+        <span
+          *ngIf="race.position > 5 && race.position <= 10"
+          style="color: #b13433"
+          >{{ race.position }}</span
+        >
+        <span *ngIf="race.position > 10" style="color: red">{{
+          race.position
+        }}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="elochange">
+      <th mat-header-cell *matHeaderCellDef>Elo</th>
+      <td mat-cell *matCellDef="let race">
+        <span *ngIf="race.eloChange < 0" style="color: red">
+          {{ race.eloChange.toFixed(0) }}
+        </span>
+        <span *ngIf="race.eloChange >= 0" style="color: green">
+          {{ race.eloChange.toFixed(0) }}
+        </span>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsRaces"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsRaces"></tr>
+  </table>
+  </ul>
+</nav>
+
+  <!-- Player rivals list -->
+  <nav style="width: 100%">
+    <ul style="position: relative; left: -6%;">
+  <table mat-table style="width: 100%" [dataSource]="selectedPlayerRivals">
+    <ng-container matColumnDef="avatar">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let rival">
+        <img src="{{ www + rival.avatar }}" width="30" />
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="firstname">
+      <th mat-header-cell *matHeaderCellDef>Firstname</th>
+      <td mat-cell *matCellDef="let rival">{{ rival.firstname }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nbRaces">
+      <th mat-header-cell *matHeaderCellDef>Nb. Races against</th>
+      <td mat-cell *matCellDef="let rival">{{ rival.nbRaces }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nbWins">
+      <th mat-header-cell *matHeaderCellDef>Nb. Wins against</th>
+      <td mat-cell *matCellDef="let rival">{{ rival.nbWins }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="ratio">
+      <th mat-header-cell *matHeaderCellDef>Win Percentage</th>
+      <td mat-cell *matCellDef="let rival">
+        <span *ngIf="rival.ratio > 0.5" style="color: green"
+          >{{ (rival.ratio * 100).toFixed(0) }}%</span
+        >
+        <span *ngIf="rival.ratio == 0.5" style="color: orange"
+          >{{ (rival.ratio * 100).toFixed(0) }}%</span
+        >
+        <span *ngIf="rival.ratio < 0.5" style="color: red"
+          >{{ (rival.ratio * 100).toFixed(0) }}%</span
+        >
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsRivals"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsRivals"></tr>
+  </table>
+</ul>
+</nav>
+
+  <!-- Player tracks list -->
+  <nav style="width: 100%">
+    <ul style="position: relative; left: -6%;">
+  <table mat-table style="width: 100%" [dataSource]="selectedPlayerTracks">
+    <ng-container matColumnDef="vignette">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let track">
+        <div
+          mat-card-avatar
+          style="background-image: url( '{{
+            www + track.vignette
+          }}' ); background-size: cover; background-position: center;"
+        ></div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let track">{{ track.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nbRaces">
+      <th mat-header-cell *matHeaderCellDef>Nb. Races on</th>
+      <td mat-cell *matCellDef="let track">{{ track.nbRaces }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="nbWins">
+      <th mat-header-cell *matHeaderCellDef>Nb. Wins on</th>
+      <td mat-cell *matCellDef="let track">{{ track.nbWins }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="ratio">
+      <th mat-header-cell *matHeaderCellDef>Win Percentage</th>
+      <td mat-cell *matCellDef="let track">
+        <span *ngIf="track.nbRaces == 0; else elseBlock">0%</span>
+        <ng-template #elseBlock>
+          <span *ngIf="track.nbWins / track.nbRaces > 0.50" style="color: green;">{{ (track.nbWins / track.nbRaces).toFixed(2) * 100 }}%</span>
+          <span *ngIf="track.nbWins / track.nbRaces == 0.50" style="color: orange;">{{ (track.nbWins / track.nbRaces).toFixed(2) * 100 }}%</span>
+          <span *ngIf="track.nbWins / track.nbRaces < 0.50" style="color: red;">{{ (track.nbWins / track.nbRaces).toFixed(2) * 100 }}%</span>
+        </ng-template>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="score">
+      <th mat-header-cell *matHeaderCellDef>Score</th>
+      <td mat-cell *matCellDef="let track">{{ track.score }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumnsTracks"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumnsTracks"></tr>
+  </table>
+  </ul>
+  </nav>
+</div>

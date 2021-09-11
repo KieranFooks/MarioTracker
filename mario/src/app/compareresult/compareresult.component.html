@@ -1,0 +1,169 @@
+<section *ngIf="comparePlayers != null">
+  <h3 style="text-align: center">Stats</h3>
+  <div *ngIf="comparePlayers != null" style="display: flex; flex-grow: grow">
+    <div class="player">
+      <mat-card>
+        <mat-card-header>
+          <div
+            mat-card-avatar
+            style="background-image: url( '{{
+              www + comparePlayers.player1.avatar
+            }}' ); background-size: cover; background-position: center;"
+          ></div>
+          <mat-card-title>{{
+            comparePlayers.player1.firstname
+          }}</mat-card-title>
+          <mat-card-subtitle
+            >#{{ comparePlayers.player1.id }}</mat-card-subtitle
+          >
+        </mat-card-header>
+        <mat-list>
+          <mat-list-item>
+            Score: {{ comparePlayers.player1.score }}</mat-list-item
+          >
+          <mat-list-item>
+            Ratio: {{ comparePlayers.player1.ratio.toFixed(2) }}</mat-list-item
+          >
+          <mat-list-item>
+            Nb. wins against {{ comparePlayers.player2.firstname }}:
+            {{ comparePlayers.player1.nbWins }}</mat-list-item
+          >
+          <mat-list-item>
+            ELO: {{ comparePlayers.player1.elo.toFixed(0) }}</mat-list-item
+          >
+        </mat-list>
+      </mat-card>
+    </div>
+    <div class="player">
+      <mat-card>
+        <mat-card-header>
+          <div
+            mat-card-avatar
+            style="background-image: url( '{{
+              www + comparePlayers.player2.avatar
+            }}' ); background-size: cover; background-position: center;"
+          ></div>
+          <mat-card-title>{{
+            comparePlayers.player2.firstname
+          }}</mat-card-title>
+          <mat-card-subtitle
+            >#{{ comparePlayers.player2.id }}</mat-card-subtitle
+          >
+        </mat-card-header>
+        <mat-list>
+          <mat-list-item>
+            Score: {{ comparePlayers.player2.score }}</mat-list-item
+          >
+          <mat-list-item>
+            Ratio: {{ comparePlayers.player2.ratio.toFixed(2) }}</mat-list-item
+          >
+          <mat-list-item>
+            Nb. wins against {{ comparePlayers.player1.firstname }}:
+            {{ comparePlayers.player2.nbWins }}</mat-list-item
+          >
+          <mat-list-item>
+            ELO: {{ comparePlayers.player2.elo.toFixed(0) }}</mat-list-item
+          >
+        </mat-list>
+      </mat-card>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <h3 style="text-align: center">Race History</h3>
+
+  <table
+    mat-table
+    matSort
+    [dataSource]="comparePlayers.races"
+    style="width: 100%"
+  >
+    <ng-container matColumnDef="No.">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let race">
+        {{ comparePlayers.races.indexOf(race) + 1 }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="vignette">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let race">
+        <div
+          mat-card-avatar
+          style="background-image: url( '{{
+            www + race.track.vignette
+          }}' ); background-size: cover; background-position: center;"
+        ></div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef>Track</th>
+      <td mat-cell *matCellDef="let race">{{ race.track.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="engine">
+      <th mat-header-cell *matHeaderCellDef>Engine Class</th>
+      <td mat-cell *matCellDef="let race">{{ race.engineClass.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef>Date</th>
+      <td mat-cell *matCellDef="let race">{{ race.date | date }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="player1">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ comparePlayers.player1.firstname }} Position
+      </th>
+      <td mat-cell *matCellDef="let race">
+        <span
+          *ngIf="race.positionPlayer1 == 1"
+          style="color: rgb(173, 147, 0); font-weight: bold"
+          >{{ race.positionPlayer1 }}</span
+        >
+        <span
+          *ngIf="race.positionPlayer1 == 2"
+          style="color: silver; font-weight: bold"
+          >{{ race.positionPlayer1 }}</span
+        >
+        <span
+          *ngIf="race.positionPlayer1 == 3"
+          style="color: #cd7f32; font-weight: bold"
+          >{{ race.positionPlayer1 }}</span
+        >
+        <span *ngIf="race.positionPlayer1 > 3"
+          >{{ race.positionPlayer1 }}</span
+        >
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="player2">
+      <th mat-header-cell *matHeaderCellDef>
+        {{ comparePlayers.player2.firstname }} Position
+      </th>
+      <td mat-cell *matCellDef="let race">
+        <span
+          *ngIf="race.positionPlayer2 == 1"
+          style="color: rgb(173, 147, 0); font-weight: bold"
+          >{{ race.positionPlayer2 }}</span
+        >
+        <span
+          *ngIf="race.positionPlayer2 == 2"
+          style="color: silver; font-weight: bold"
+          >{{ race.positionPlayer2 }}</span
+        >
+        <span
+          *ngIf="race.positionPlayer2 == 3"
+          style="color: #cd7f32; font-weight: bold"
+          >{{ race.positionPlayer2 }}</span
+        >
+        <span *ngIf="race.positionPlayer2 > 3"
+          >{{ race.positionPlayer2 }}</span
+        >
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</section>

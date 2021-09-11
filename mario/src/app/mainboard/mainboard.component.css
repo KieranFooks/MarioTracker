@@ -1,0 +1,28 @@
+.submit{
+    background-color: green;
+    color:whitesmoke;
+    width: 90%;
+}
+
+.reset{
+    bottom: 5%;
+    background-color:darkorange;
+    color: black;
+    width: 90%;
+}
+
+.submitContainer {
+    text-align: center;
+}
+
+.info{
+    width: 100%;
+}
+
+app-mainengine{
+    width: 100%;
+}
+
+app-maintrack{
+    width: 100%;
+}

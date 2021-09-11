@@ -1,0 +1,12 @@
+<nav>
+  <ul class="races">
+    <li
+      *ngFor="let race of races"
+      (click)="onSelect(race)"
+      [class.selected]="race === selectedRace"
+    >
+      <span class="badge">{{ race.id }}</span
+      >{{race.track.name}} ({{race.engineClass.name}}) <br> {{ race.date | date:'medium' }}
+    </li>
+  </ul>
+</nav>

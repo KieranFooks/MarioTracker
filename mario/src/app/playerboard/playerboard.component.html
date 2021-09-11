@@ -1,0 +1,14 @@
+<div style="padding-left: 1%">
+  <h4>Select Player</h4>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Select a Player</mat-label>
+    <mat-select [(value)]="selectedPlayerId">
+      <mat-option *ngFor="let player of players" [value]="player.id">
+        {{ player.firstname }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<app-playercard *ngIf="selectedPlayerId != null" [selectedPlayerId]="selectedPlayerId"></app-playercard>

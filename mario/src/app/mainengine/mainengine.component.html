@@ -1,0 +1,15 @@
+<div class="engine">
+  <h4>Select Engine Class</h4>
+  <mat-form-field appearance="fill">
+    <mat-label>Engine Class</mat-label>
+    <mat-select
+      (selectionChange)="selectEngine(selectedEngine)"
+      [(value)]="selectedEngine"
+      required
+    >
+      <mat-option *ngFor="let engine of engines" [value]="engine.id">
+        {{ engine.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
